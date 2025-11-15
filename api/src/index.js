@@ -9,6 +9,29 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+// Root endpoint - API information
+app.get('/', (req, res) => {
+  res.json({
+    name: 'DocFlow API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      api: {
+        auth: '/api/auth',
+        documents: '/api/documents',
+        folders: '/api/folders',
+        courses: '/api/courses',
+        tasks: '/api/tasks',
+        submissions: '/api/submissions',
+        search: '/api/search',
+        comments: '/api/comments',
+        files: '/api/files'
+      }
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/health', async (req, res) => {
   try {
